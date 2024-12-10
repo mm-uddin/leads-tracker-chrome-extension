@@ -14,7 +14,7 @@ body{
 
 }
 
-#save-btn{
+#save-btn, #save-tab-btn{
     color: #FFFFFF;
     background-color: #5f9341;
     font-weight: bold;
@@ -22,6 +22,14 @@ body{
     border: none;
     
 
+}
+
+#dlt-btn{
+  color: #5f9341;
+  background-color: #FFFFFF;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 1px solid #5f9341;
 }
 
 li{

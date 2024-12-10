@@ -6,26 +6,53 @@ const leadsInput = document.getElementById("leads-input")
 const saveBtn = document.getElementById("save-btn")
 const displayLink = document.getElementById("display-link")
 const dltBtn = document.getElementById("dlt-btn")
+const saveTabBtn = document.getElementById("save-tab-btn")
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("leadsList"))
 
-saveBtn.addEventListener("click", function(){
-   myLeads.push(leadsInput.value) 
-   renderLeads()
-   leadsInput.value =""
-})
+if(leadsFromLocalStorage){
+  myLeads = leadsFromLocalStorage
+  renderLeads(myLeads)
+}
 
-dltBtn.addEventListener("click", function(){
-    displayLink.remove()
-    
-})
+const tabs = [
+  {url: "https://www.linkedin.com/in/mmuddin5/"}
+]
 
 
-
-function renderLeads(){
+function renderLeads(leads){
     let listItems = ""
-    for (let i = 0; i < myLeads.length; i++){
-        listItems += `<li> <a href = "${myLeads[i]}" target = "_blank"> ${myLeads[i]} </a> </li>`
+    for (let i = 0; i < leads.length; i++){
+        listItems += `<li> <a href = "${leads[i]}" target = "_blank"> ${leads[i]} </a> </li>`
 
     }
 
 displayLink.innerHTML = listItems
 }
+
+saveBtn.addEventListener("click", function(){
+   myLeads.push(leadsInput.value) 
+   leadsInput.value =""
+   localStorage.setItem("leadsList", JSON.stringify(myLeads))
+
+   renderLeads(myLeads)
+
+  
+})
+
+saveTabBtn.addEventListener("click", function(){
+   myLeads.push(tabs[0].url) 
+   leadsInput.value =""
+   localStorage.setItem("leadsList", JSON.stringify(myLeads))
+   renderLeads(myLeads)
+
+})
+
+
+dltBtn.addEventListener("dblclick", function(){
+    localStorage.clear()
+    myLeads = []
+    renderLeads(myLeads)
+    
+})
+
+
