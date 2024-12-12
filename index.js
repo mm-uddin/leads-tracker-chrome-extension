@@ -14,9 +14,6 @@ if(leadsFromLocalStorage){
   renderLeads(myLeads)
 }
 
-const tabs = [
-  {url: "https://www.linkedin.com/in/mmuddin5/"}
-]
 
 
 function renderLeads(leads){
@@ -40,10 +37,15 @@ saveBtn.addEventListener("click", function(){
 })
 
 saveTabBtn.addEventListener("click", function(){
-   myLeads.push(tabs[0].url) 
-   leadsInput.value =""
-   localStorage.setItem("leadsList", JSON.stringify(myLeads))
-   renderLeads(myLeads)
+
+  chrome.tabs.query({active: true, currentWindow: true}, function (tabs){
+  myLeads.push(tabs[0].url) 
+  leadsInput.value =""
+  localStorage.setItem("leadsList", JSON.stringify(myLeads))
+  renderLeads(myLeads)
+
+  })
+   
 
 })
 
